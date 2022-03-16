@@ -46,6 +46,12 @@ public class User implements Serializable {
     @Column(name = ("lastname"))
     private String lastname;
 
+    @Column(name = ("email"))
+    private String email;
+
+    @Column(name = ("password"))
+    private String password;
+
     @Column(name = ("status"))
     private Boolean status;
 

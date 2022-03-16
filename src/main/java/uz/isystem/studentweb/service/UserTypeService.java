@@ -27,6 +27,14 @@ public class UserTypeService {
         return dto;
     }
 
+    public UserType getEntityByName(String name){
+        Optional<UserType> optional = userTypeRepository.findByNameAndDeletedAtIsNull(name);
+        if (optional.isEmpty()){
+            throw new ServerBadRequestException("Usertype not found");
+        }
+        return optional.get();
+    }
+
     public List<UserTypeDto> getByName(String name) {
         List<UserType> userTypeList = userTypeRepository.findAllByName(name);
         if (userTypeList.isEmpty()) {

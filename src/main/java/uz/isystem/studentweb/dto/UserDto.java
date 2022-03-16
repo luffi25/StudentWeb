@@ -31,6 +31,8 @@ public class UserDto {
     @NotBlank(message = ("First name invalid"))
     private String firstname;
     private String lastname;
+    private String password;
+    private String token;
     private Boolean status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
