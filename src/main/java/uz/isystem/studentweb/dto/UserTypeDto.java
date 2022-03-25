@@ -1,5 +1,6 @@
 package uz.isystem.studentweb.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -12,6 +13,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserTypeDto {
 
     private Integer id;

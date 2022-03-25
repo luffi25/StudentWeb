@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user-type")
+@RequestMapping("/api/user-type")
 public class UserTypeController {
     @Autowired
     private UserTypeService userTypeService;

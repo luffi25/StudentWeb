@@ -45,7 +45,7 @@ public class AuthService {
         user.setPassword(PasswordService.generateMD5(dto.getPassword()));
         user.setStatus(false);
         user.setCreatedAt(LocalDateTime.now());
-        UserType userType = userTypeService.getEntityByName("USER");
+        UserType userType = userTypeService.getEntityByName("ROLE_USER");
         user.setUserTypeId(userType.getId());
         userRepository.save(user);
         String link = address + jwtTokenUtil.generateToken(user);

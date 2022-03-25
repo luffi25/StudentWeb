@@ -19,6 +19,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
+        System.out.println("Custom User details");
         Optional<User> optional = userRepository.findByPhoneAndDeletedAtIsNull(phone);
         if (optional.isEmpty()){
             throw new UsernameNotFoundException("Phone number not found");
