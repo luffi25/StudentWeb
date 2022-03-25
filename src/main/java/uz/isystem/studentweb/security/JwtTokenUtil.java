@@ -51,7 +51,7 @@ public class JwtTokenUtil {
 
     public boolean validate(String token){
        try {
-           Jwts.parser().setSigningKey(token).setSigningKey(jwtSecret);
+           Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
            return true;
        }catch (Exception e){
            e.printStackTrace();

@@ -1,5 +1,6 @@
 package uz.isystem.studentweb.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import uz.isystem.studentweb.dto.AuthDto;
 import uz.isystem.studentweb.dto.RegistrationDto;
@@ -11,6 +12,7 @@ import uz.isystem.studentweb.repository.UserRepository;
 import uz.isystem.studentweb.security.JwtTokenUtil;
 import uz.isystem.studentweb.util.PasswordService;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -19,6 +21,9 @@ public class AuthService {
     private final JwtTokenUtil jwtTokenUtil;
     private final MailSenderService mailSenderService;
     private final UserTypeService userTypeService;
+
+    @Value("${mailSendAddress}")
+    private String address;
 
     public AuthService(UserRepository userRepository,
                        MailSenderService mailSenderService,
@@ -39,11 +44,11 @@ public class AuthService {
         user.setEmail(dto.getEmail());
         user.setPassword(PasswordService.generateMD5(dto.getPassword()));
         user.setStatus(false);
-
+        user.setCreatedAt(LocalDateTime.now());
         UserType userType = userTypeService.getEntityByName("USER");
         user.setUserTypeId(userType.getId());
         userRepository.save(user);
-        String link = "http://localhost:8080/api/validation/" + jwtTokenUtil.generateToken(user);
+        String link = address + jwtTokenUtil.generateToken(user);
 
         String content = String.format("Please verify your data, click to link %s", link);
         try {
@@ -78,6 +83,5 @@ public class AuthService {
         userDto.setToken(jwtTokenUtil.generateToken(user));
         return userDto;
     }
-
 
 }

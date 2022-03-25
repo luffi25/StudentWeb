@@ -34,6 +34,7 @@ public class UserService {
         UserDto userDto = new UserDto();
         UserTypeDto userTypeDto = userTypeService.get(user.getUserTypeId());
         userDto.setUserType(userTypeDto);
+        userDto = convertEntityToDto(user, userDto);
         //TODO: all fields set
         return userDto;
     }

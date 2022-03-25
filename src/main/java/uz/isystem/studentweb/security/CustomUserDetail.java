@@ -9,12 +9,14 @@ import java.util.Collection;
 import java.util.List;
 
 public class CustomUserDetail implements UserDetails {
+    private Integer id;
     private final String password;
     private final String phone;
     private final Boolean status;
     private final List<GrantedAuthority> authorityList;
 
     public CustomUserDetail(User user) {
+        this.id = user.getId();
         this.password = user.getPassword();
         this.phone = user.getUsername();
         this.status = user.getStatus();
@@ -54,5 +56,18 @@ public class CustomUserDetail implements UserDetails {
     @Override
     public boolean isEnabled() {
         return status;
+    }
+
+    public Integer getId(){
+        return this.id;
+    }
+    @Override
+    public String toString() {
+        return "CustomUserDetail{" +
+                "password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", status=" + status +
+                ", authorityList=" + authorityList +
+                '}';
     }
 }
