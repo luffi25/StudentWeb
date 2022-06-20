@@ -52,7 +52,7 @@ public class CourseService {
         return true;
     }
 
-    //Secondary functions
+    //Secondary functions -
     public Course getEntity(Integer id) {
         Optional<Course> optional = courseRepository.findById(id);
         if (optional.isEmpty() || optional.get().getDeletedAt() != null) {
